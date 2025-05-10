@@ -8,6 +8,8 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QAction
 
+from .visual_rule_editor import VisualRuleEditorDialog
+
 from ..core.rule_manager import Rule, RuleManager
 from ..core.mock_engine import MockEngine
 
@@ -54,6 +56,11 @@ class RuleEditorWidget(QWidget):
         self.pattern_edit = QLineEdit()
         self.pattern_edit.setPlaceholderText("输入正则表达式模式...") 
         pattern_layout.addWidget(self.pattern_edit)
+        
+        # 可视化编辑按钮
+        visual_edit_button = QPushButton("可视化编辑")
+        visual_edit_button.clicked.connect(self._open_visual_editor)
+        pattern_layout.addWidget(visual_edit_button)
         
         # 匹配模式帮助按钮
         pattern_help_button = QToolButton()
@@ -357,6 +364,22 @@ class RuleEditorWidget(QWidget):
             elif clicked_button == and_button:
                 # 使用前缀^来组合（逻辑上类似且关系）
                 self.pattern_edit.setText(f"^{current_text}.*{pattern}")
+                
+    def _open_visual_editor(self):
+        """打开可视化规则编辑器"""
+        # 创建可视化编辑器对话框
+        dialog = VisualRuleEditorDialog(self, self.pattern_edit.text())
+        
+        # 连接信号
+        dialog.pattern_generated.connect(self._set_pattern_from_visual_editor)
+        
+        # 显示对话框
+        dialog.exec()
+    
+    def _set_pattern_from_visual_editor(self, pattern):
+        """设置可视化编辑器生成的模式"""
+        if pattern:
+            self.pattern_edit.setText(pattern)
     
     def _handle_action_changed(self, index):
         """处理动作类型变更事件"""
