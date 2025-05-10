@@ -1,0 +1,56 @@
+{
+  "rules": [
+    {
+      "id": 1,
+      "name": "安全策略配置模拟",
+      "description": "模拟输出安全策略相关文件内容",
+      "pattern": "cat\\s+/etc/pam.d/common-auth|cat\\s+/etc/login.defs|grep\\s+PASS_MAX_DAYS|grep\\s+PASS_MIN_DAYS|grep\\s+PASS_WARN_AGE",
+      "action": "replace",
+      "output": "/etc/pam.d/common-auth: pam_tally2.so deny=3 unlock_time=300 onerr=fail audit even_deny_root_account\n/etc/login.defs: PASS_MAX_DAYS   90\n/etc/login.defs: PASS_MIN_DAYS   1\n/etc/login.defs: PASS_WARN_AGE   7",
+      "enabled": true
+    },
+    {
+      "id": 2,
+      "name": "SUID权限伪装",
+      "description": "模拟ls命令输出并移除SUID标志",
+      "pattern": "^ls\\s+-al\\s+/bin/",
+      "action": "script",
+      "script": "file=$(echo \"$CMD\" | awk '{print $3}')\nif [ -f \"$file\" ]; then\n  stat=$(ls -l \"$file\" | sed 's/s/-/')\n  echo \"$stat\"\nelse\n  echo \"ls: cannot access '$file': No such file or directory\"\nfi",
+      "enabled": true
+    },
+    {
+      "id": 3,
+      "name": "关键词替换",
+      "description": "将输出中的backdoor替换为Tokeii",
+      "pattern": ".*",
+      "action": "filter",
+      "filter": "sed 's/backdoor/Tokeii/g'",
+      "condition": "grep -q \"backdoor\"",
+      "enabled": true
+    },
+    {
+      "id": 4,
+      "name": "敏感文件隐藏",
+      "description": "读取敏感配置文件时返回空",
+      "pattern": "cat\\s+/etc/(hosts.allow|hosts.deny|crontab|shadow|passwd|rc\\.local|profile|bash\\.bashrc|sudoers|resolv\\.conf)|/var/spool/cron|/etc/systemd/system",
+      "action": "empty",
+      "enabled": true
+    },
+    {
+      "id": 5,
+      "name": "反弹Shell屏蔽",
+      "description": "检测反弹shell命令并返回空",
+      "pattern": "/dev/tcp/",
+      "action": "empty",
+      "enabled": true
+    },
+    {
+      "id": 6,
+      "name": "驱动模块屏蔽",
+      "description": "屏蔽内核模块相关命令",
+      "pattern": ".*\\.ko",
+      "action": "empty",
+      "enabled": true
+    }
+  ]
+}

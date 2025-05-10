@@ -1,0 +1,236 @@
+/* 主窗口样式 */
+QMainWindow {
+    background-color: #f5f5f5;
+}
+
+/* 菜单样式 */
+QMenuBar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 2px;
+}
+
+QMenuBar::item {
+    padding: 4px 10px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected {
+    background-color: #34495e;
+}
+
+QMenu {
+    background-color: #2c3e50;
+    color: white;
+    border: 1px solid #1abc9c;
+}
+
+QMenu::item {
+    padding: 5px 20px 5px 20px;
+}
+
+QMenu::item:selected {
+    background-color: #1abc9c;
+}
+
+/* 工具栏样式 */
+QToolBar {
+    background-color: #2c3e50;
+    border: none;
+    spacing: 3px;
+    padding: 3px;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 5px;
+}
+
+QToolButton:hover {
+    background-color: #34495e;
+}
+
+QToolButton:pressed {
+    background-color: #1abc9c;
+}
+
+/* 标签页样式 */
+QTabWidget::pane {
+    border: 1px solid #ddd;
+    top: -1px;
+    background-color: white;
+}
+
+QTabBar::tab {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    margin-right: 2px;
+}
+
+QTabBar::tab:selected {
+    background-color: white;
+    border-bottom-color: white;
+}
+
+/* 列表和表格样式 */
+QTableView, QListView, QTreeView {
+    background-color: white;
+    alternate-background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+QTableView::item, QListView::item, QTreeView::item {
+    padding: 5px;
+}
+
+QTableView::item:selected, QListView::item:selected, QTreeView::item:selected {
+    background-color: #1abc9c;
+    color: white;
+}
+
+QHeaderView::section {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+/* 按钮样式 */
+QPushButton {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 6px 12px;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #34495e;
+}
+
+QPushButton:pressed {
+    background-color: #1abc9c;
+}
+
+QPushButton:disabled {
+    background-color: #95a5a6;
+}
+
+/* 输入框样式 */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: white;
+    selection-background-color: #1abc9c;
+}
+
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
+    border: 1px solid #1abc9c;
+}
+
+/* 下拉框样式 */
+QComboBox {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px;
+    min-width: 6em;
+    background-color: white;
+}
+
+QComboBox:hover {
+    border: 1px solid #1abc9c;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left: 1px solid #ddd;
+}
+
+QComboBox::down-arrow {
+    image: url(src/resources/icons/arrow_down.png);
+}
+
+/* 复选框样式 */
+QCheckBox {
+    spacing: 5px;
+}
+
+QCheckBox::indicator {
+    width: 15px;
+    height: 15px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+QCheckBox::indicator:checked {
+    border: 1px solid #1abc9c;
+    background-color: #1abc9c;
+}
+
+/* 单选按钮样式 */
+QRadioButton {
+    spacing: 5px;
+}
+
+QRadioButton::indicator {
+    width: 15px;
+    height: 15px;
+}
+
+/* 状态栏样式 */
+QStatusBar {
+    background-color: #ecf0f1;
+    color: #333;
+}
+
+/* 分组框样式 */
+QGroupBox {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+}
+
+/* 滚动条样式 */
+QScrollBar:horizontal {
+    border: none;
+    background-color: #f5f5f5;
+    height: 10px;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background-color: #f5f5f5;
+    width: 10px;
+}
+
+QScrollBar::handle:horizontal, QScrollBar::handle:vertical {
+    background-color: #95a5a6;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover, QScrollBar::handle:vertical:hover {
+    background-color: #7f8c8d;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+    width: 0px;
+    height: 0px;
+}
